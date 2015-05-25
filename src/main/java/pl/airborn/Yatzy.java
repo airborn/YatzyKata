@@ -37,40 +37,24 @@ public class Yatzy {
     }
 
     public int twos() {
-        return (int) IntStream.of(dice).filter(i -> i == 2).sum();
+        return IntStream.of(dice).filter(i -> i == 2).sum();
     }
 
     public int threes() {
-        return (int) IntStream.of(dice).filter(i -> i == 3).sum();
+        return IntStream.of(dice).filter(i -> i == 3).sum();
     }
 
 
     public int fours() {
-        int sum;
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
-        }
-        return sum;
+        return IntStream.of(dice).filter(i -> i == 4).sum();
     }
 
     public int fives() {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++)
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+        return IntStream.of(dice).filter(i -> i == 5).sum();
     }
 
     public int sixes() {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++)
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+        return IntStream.of(dice).filter(i -> i == 6).sum();
     }
 
     public int score_pair() {
