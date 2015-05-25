@@ -46,7 +46,7 @@ public class YatzyTest {
     @Parameters(method = "ones")
     @TestCaseName("[{index}] ones of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void test_1s(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.ones(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).ones();
         assertThat(actual).isEqualTo(expected);
     }
 
