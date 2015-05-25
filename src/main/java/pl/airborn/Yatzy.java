@@ -23,7 +23,7 @@ public class Yatzy {
         return total;
     }
 
-    public static int yatzy(int... dice) {
+    public int yatzy() {
         int[] counts = new int[6];
         for (int die : dice)
             counts[die - 1]++;
