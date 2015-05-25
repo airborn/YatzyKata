@@ -2,6 +2,10 @@ package pl.airborn;
 
 import java.util.stream.IntStream;
 
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+
 public class Yatzy {
 
     protected int[] dice;
@@ -20,13 +24,12 @@ public class Yatzy {
     }
 
     public int yatzy() {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die - 1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+        return IntStream.of(dice).boxed()
+                .collect(groupingBy(identity(), counting()))
+                .values().stream()
+                .filter(size -> size == 5)
+                .map(s -> 50)
+                .findFirst().orElse(0);
     }
 
     public int ones() {
