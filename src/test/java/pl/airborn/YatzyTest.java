@@ -172,7 +172,7 @@ public class YatzyTest {
     @Parameters(method = "three")
     @TestCaseName("[{index}] three of a kind of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void three_of_a_kind(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.three_of_a_kind(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).three_of_a_kind();
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -205,7 +205,7 @@ public class YatzyTest {
     @Parameters(method = "small")
     @TestCaseName("[{index}] small straight of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void smallStraight(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.smallStraight(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).smallStraight();
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -221,7 +221,7 @@ public class YatzyTest {
     @Parameters(method = "large")
     @TestCaseName("[{index}] large straight of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void largeStraight(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.largeStraight(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).largeStraight();
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -237,7 +237,7 @@ public class YatzyTest {
     @Parameters(method = "full")
     @TestCaseName("[{index}] full house of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void fullHouse(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.fullHouse(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).fullHouse();
         assertThat(actual).isEqualTo(expected);
     }
 

@@ -143,28 +143,28 @@ public class Yatzy {
         return 0;
     }
 
-    public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5) {
+    public int three_of_a_kind() {
         int[] t;
         t = new int[6];
-        t[d1 - 1]++;
-        t[d2 - 1]++;
-        t[d3 - 1]++;
-        t[d4 - 1]++;
-        t[d5 - 1]++;
+        t[dice[0] - 1]++;
+        t[dice[1] - 1]++;
+        t[dice[2] - 1]++;
+        t[dice[3] - 1]++;
+        t[dice[4] - 1]++;
         for (int i = 0; i < 6; i++)
             if (t[i] >= 3)
                 return (i + 1) * 3;
         return 0;
     }
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
+    public int smallStraight() {
         int[] tallies;
         tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
+        tallies[dice[0] - 1] += 1;
+        tallies[dice[1] - 1] += 1;
+        tallies[dice[2] - 1] += 1;
+        tallies[dice[3] - 1] += 1;
+        tallies[dice[4] - 1] += 1;
         if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -174,14 +174,14 @@ public class Yatzy {
         return 0;
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
+    public int largeStraight() {
         int[] tallies;
         tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
+        tallies[dice[0] - 1] += 1;
+        tallies[dice[1] - 1] += 1;
+        tallies[dice[2] - 1] += 1;
+        tallies[dice[3] - 1] += 1;
+        tallies[dice[4] - 1] += 1;
         if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
@@ -191,7 +191,7 @@ public class Yatzy {
         return 0;
     }
 
-    public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
+    public int fullHouse() {
         int[] tallies;
         boolean _2 = false;
         int i;
@@ -201,11 +201,11 @@ public class Yatzy {
 
 
         tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
+        tallies[dice[0] - 1] += 1;
+        tallies[dice[1] - 1] += 1;
+        tallies[dice[2] - 1] += 1;
+        tallies[dice[3] - 1] += 1;
+        tallies[dice[4] - 1] += 1;
 
         for (i = 0; i != 6; i += 1)
             if (tallies[i] == 2) {
