@@ -189,7 +189,7 @@ public class YatzyTest {
     @Parameters(method = "four")
     @TestCaseName("[{index}] four of a kind of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void four_of_a_kind(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.four_of_a_kind(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).four_of_a_kind();
         assertThat(actual).isEqualTo(expected);
     }
 
