@@ -33,28 +33,32 @@ public class Yatzy {
     }
 
     public int ones() {
-        return (int) IntStream.of(dice).filter(i -> i == 1).count();
+        return countOccurrences(1);
     }
 
     public int twos() {
-        return IntStream.of(dice).filter(i -> i == 2).sum();
+        return countOccurrences(2);
     }
 
     public int threes() {
-        return IntStream.of(dice).filter(i -> i == 3).sum();
+        return countOccurrences(3);
     }
 
 
     public int fours() {
-        return IntStream.of(dice).filter(i -> i == 4).sum();
+        return countOccurrences(4);
     }
 
     public int fives() {
-        return IntStream.of(dice).filter(i -> i == 5).sum();
+        return countOccurrences(5);
     }
 
     public int sixes() {
-        return IntStream.of(dice).filter(i -> i == 6).sum();
+        return countOccurrences(6);
+    }
+
+    private int countOccurrences(int occurrenceOf) {
+        return IntStream.of(dice).filter(i -> i == occurrenceOf).sum();
     }
 
     public int score_pair() {
