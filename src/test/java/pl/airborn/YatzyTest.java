@@ -63,7 +63,7 @@ public class YatzyTest {
     @Parameters(method = "twos")
     @TestCaseName("[{index}] twos of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void test_2s(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.twos(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).twos();
         assertThat(actual).isEqualTo(expected);
     }
 
