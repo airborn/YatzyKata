@@ -141,7 +141,7 @@ public class YatzyTest {
     @Parameters(method = "pair")
     @TestCaseName("[{index}] pair of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void one_pair(int d1, int d2, int d3, int d4, int d5, int expected) {
-        int actual = Yatzy.score_pair(d1, d2, d3, d4, d5);
+        int actual = new Yatzy(d1, d2, d3, d4, d5).score_pair();
         assertThat(actual).isEqualTo(expected);
     }
 
