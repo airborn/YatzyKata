@@ -1,113 +1,251 @@
 package pl.airborn;
 
-import org.junit.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import junitparams.naming.TestCaseName;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class YatzyTest {
 
     @Test
-    public void chance_scores_sum_of_all_dice() {
-        int expected = 15;
-        int actual = Yatzy.chance(2, 3, 4, 5, 1);
-        assertEquals(expected, actual);
-        assertEquals(16, Yatzy.chance(3, 3, 4, 5, 1));
+    @Parameters(method = "chance")
+    @TestCaseName("[{index}] chance of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void chance_scores_sum_of_all_dice(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.chance(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] chance() {
+        return new Object[]{
+                new Object[]{2, 3, 4, 5, 1, 15},
+                new Object[]{3, 3, 4, 5, 1, 16}
+        };
     }
 
     @Test
-    public void yatzy_scores_50() {
-        int expected = 50;
-        int actual = Yatzy.yatzy(4, 4, 4, 4, 4);
-        assertEquals(expected, actual);
-        assertEquals(50, Yatzy.yatzy(6, 6, 6, 6, 6));
-        assertEquals(0, Yatzy.yatzy(6, 6, 6, 6, 3));
+    @Parameters(method = "yatzy")
+    @TestCaseName("[{index}] yatzy of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void yatzy_scores_50(int d1, int d2, int d3, int d4, int d5, int expected) {
+
+        int actual = Yatzy.yatzy(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] yatzy() {
+        return new Object[]{
+                new Object[]{4, 4, 4, 4, 4, 50},
+                new Object[]{6, 6, 6, 6, 6, 50},
+                new Object[]{6, 6, 6, 6, 3, 0}
+        };
     }
 
     @Test
-    public void test_1s() {
-        assertTrue(Yatzy.ones(1, 2, 3, 4, 5) == 1);
-        assertEquals(2, Yatzy.ones(1, 2, 1, 4, 5));
-        assertEquals(0, Yatzy.ones(6, 2, 2, 4, 5));
-        assertEquals(4, Yatzy.ones(1, 2, 1, 1, 1));
+    @Parameters(method = "ones")
+    @TestCaseName("[{index}] ones of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void test_1s(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.ones(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] ones() {
+        return new Object[]{
+                new Object[]{1, 2, 1, 4, 5, 2},
+                new Object[]{6, 2, 2, 4, 5, 0},
+                new Object[]{1, 2, 1, 1, 1, 4},
+                new Object[]{1, 2, 3, 4, 5, 1}
+        };
     }
 
     @Test
-    public void test_2s() {
-        assertEquals(4, Yatzy.twos(1, 2, 3, 2, 6));
-        assertEquals(10, Yatzy.twos(2, 2, 2, 2, 2));
+    @Parameters(method = "twos")
+    @TestCaseName("[{index}] twos of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void test_2s(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.twos(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] twos() {
+        return new Object[]{
+                new Object[]{1, 2, 3, 2, 6, 4},
+                new Object[]{2, 2, 2, 2, 2, 10}
+        };
     }
 
     @Test
-    public void test_threes() {
-        assertEquals(6, Yatzy.threes(1, 2, 3, 2, 3));
-        assertEquals(12, Yatzy.threes(2, 3, 3, 3, 3));
+    @Parameters(method = "threes")
+    @TestCaseName("[{index}] threes of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void test_threes(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.threes(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] threes() {
+        return new Object[]{
+                new Object[]{1, 2, 3, 2, 3, 6},
+                new Object[]{2, 3, 3, 3, 3, 12}
+        };
     }
 
     @Test
-    public void fours_test() {
-        assertEquals(12, new Yatzy(4, 4, 4, 5, 5).fours());
-        assertEquals(8, new Yatzy(4, 4, 5, 5, 5).fours());
-        assertEquals(4, new Yatzy(4, 5, 5, 5, 5).fours());
+    @Parameters(method = "fours")
+    @TestCaseName("[{index}] fours of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void fours_test(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = new Yatzy(d1, d2, d3, d4, d5).fours();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] fours() {
+        return new Object[]{
+                new Object[]{4, 4, 4, 5, 5, 12},
+                new Object[]{4, 4, 5, 5, 5, 8},
+                new Object[]{4, 5, 5, 5, 5, 4},
+        };
     }
 
     @Test
-    public void fives() {
-        assertEquals(10, new Yatzy(4, 4, 4, 5, 5).fives());
-        assertEquals(15, new Yatzy(4, 4, 5, 5, 5).fives());
-        assertEquals(20, new Yatzy(4, 5, 5, 5, 5).fives());
+    @Parameters(method = "fives")
+    @TestCaseName("[{index}] fives of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void fives(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = new Yatzy(d1, d2, d3, d4, d5).fives();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] fives() {
+        return new Object[]{
+                new Object[]{4, 4, 4, 5, 5, 10},
+                new Object[]{4, 4, 5, 5, 5, 15},
+                new Object[]{4, 5, 5, 5, 5, 20},
+        };
     }
 
     @Test
-    public void sixes_test() {
-        assertEquals(0, new Yatzy(4, 4, 4, 5, 5).sixes());
-        assertEquals(6, new Yatzy(4, 4, 6, 5, 5).sixes());
-        assertEquals(18, new Yatzy(6, 5, 6, 6, 5).sixes());
+    @Parameters(method = "sixes")
+    @TestCaseName("[{index}] sixes of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void sixes_test(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = new Yatzy(d1, d2, d3, d4, d5).sixes();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] sixes() {
+        return new Object[]{
+                new Object[]{4, 4, 4, 5, 5, 0},
+                new Object[]{4, 4, 6, 5, 5, 6},
+                new Object[]{6, 5, 6, 6, 5, 18},
+        };
     }
 
     @Test
-    public void one_pair() {
-        assertEquals(6, Yatzy.score_pair(3, 4, 3, 5, 6));
-        assertEquals(10, Yatzy.score_pair(5, 3, 3, 3, 5));
-        assertEquals(12, Yatzy.score_pair(5, 3, 6, 6, 5));
+    @Parameters(method = "pair")
+    @TestCaseName("[{index}] pair of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void one_pair(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.score_pair(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] pair() {
+        return new Object[]{
+                new Object[]{3, 4, 3, 5, 6, 6},
+                new Object[]{5, 3, 3, 3, 5, 10},
+                new Object[]{5, 3, 6, 6, 5, 12},
+        };
     }
 
     @Test
-    public void two_Pair() {
-        assertEquals(16, Yatzy.two_pair(3, 3, 5, 4, 5));
-        assertEquals(16, Yatzy.two_pair(3, 3, 5, 5, 5));
+    @Parameters(method = "pairs")
+    @TestCaseName("[{index}] pairs of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void two_pairs(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.two_pair(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] pairs() {
+        return new Object[]{
+                new Object[]{3, 3, 5, 4, 5, 16},
+                new Object[]{3, 3, 5, 5, 5, 16},
+        };
+    }
+
+
+    @Parameters(method = "three")
+    @TestCaseName("[{index}] three of a kind of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void three_of_a_kind(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.three_of_a_kind(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] three() {
+        return new Object[]{
+                new Object[]{3, 3, 3, 4, 5, 9},
+                new Object[]{3, 3, 3, 3, 5, 9},
+                new Object[]{5, 3, 5, 4, 5, 15},
+        };
+    }
+
+
+    @Test
+    @Parameters(method = "four")
+    @TestCaseName("[{index}] four of a kind of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void four_of_a_kind(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.four_of_a_kind(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] four() {
+        return new Object[]{
+                new Object[]{3, 3, 3, 3, 5, 12},
+                new Object[]{5, 5, 5, 4, 5, 20},
+                new Object[]{3, 3, 3, 3, 3, 12},
+        };
     }
 
     @Test
-    public void three_of_a_kind() {
-        assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 4, 5));
-        assertEquals(15, Yatzy.three_of_a_kind(5, 3, 5, 4, 5));
-        assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 3, 5));
+    @Parameters(method = "small")
+    @TestCaseName("[{index}] small straight of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void smallStraight(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.smallStraight(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] small() {
+        return new Object[]{
+                new Object[]{1, 2, 3, 4, 5, 15},
+                new Object[]{2, 3, 4, 5, 1, 15},
+                new Object[]{1, 2, 2, 4, 5, 0}
+        };
     }
 
     @Test
-    public void four_of_a_knd() {
-        assertEquals(12, Yatzy.four_of_a_kind(3, 3, 3, 3, 5));
-        assertEquals(20, Yatzy.four_of_a_kind(5, 5, 5, 4, 5));
-        assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 3, 3));
+    @Parameters(method = "large")
+    @TestCaseName("[{index}] large straight of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void largeStraight(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.largeStraight(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    Object[] large() {
+        return new Object[]{
+                new Object[]{6, 2, 3, 4, 5, 20},
+                new Object[]{2, 3, 4, 5, 6, 20},
+                new Object[]{1, 2, 2, 4, 5, 0}
+        };
     }
 
     @Test
-    public void smallStraight() {
-        assertEquals(15, Yatzy.smallStraight(1, 2, 3, 4, 5));
-        assertEquals(15, Yatzy.smallStraight(2, 3, 4, 5, 1));
-        assertEquals(0, Yatzy.smallStraight(1, 2, 2, 4, 5));
+    @Parameters(method = "full")
+    @TestCaseName("[{index}] full house of({0}, {1}, {2}, {3}, {4}) is {5}")
+    public void fullHouse(int d1, int d2, int d3, int d4, int d5, int expected) {
+        int actual = Yatzy.fullHouse(d1, d2, d3, d4, d5);
+        assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    public void largeStraight() {
-        assertEquals(20, Yatzy.largeStraight(6, 2, 3, 4, 5));
-        assertEquals(20, Yatzy.largeStraight(2, 3, 4, 5, 6));
-        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5));
-    }
-
-    @Test
-    public void fullHouse() {
-        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6));
-        assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6));
+    Object[] full() {
+        return new Object[]{
+                new Object[]{6, 2, 2, 2, 6, 18},
+                new Object[]{2, 3, 4, 5, 6, 0}
+        };
     }
 }
