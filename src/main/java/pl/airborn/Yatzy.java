@@ -33,15 +33,7 @@ public class Yatzy {
     }
 
     public int ones() {
-        int sum = 0;
-        if (dice[0] == 1) sum++;
-        if (dice[1] == 1) sum++;
-        if (dice[2] == 1) sum++;
-        if (dice[3] == 1) sum++;
-        if (dice[4] == 1)
-            sum++;
-
-        return sum;
+        return (int) IntStream.of(dice).filter(i -> i == 1).count();
     }
 
     public int twos() {
