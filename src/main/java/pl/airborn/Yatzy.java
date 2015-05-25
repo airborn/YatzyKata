@@ -1,5 +1,7 @@
 package pl.airborn;
 
+import java.util.stream.IntStream;
+
 public class Yatzy {
 
     protected int[] dice;
@@ -14,13 +16,7 @@ public class Yatzy {
     }
 
     public int chance() {
-        int total = 0;
-        total += dice[0];
-        total += dice[1];
-        total += dice[2];
-        total += dice[3];
-        total += dice[4];
-        return total;
+        return IntStream.of(dice).sum();
     }
 
     public int yatzy() {
