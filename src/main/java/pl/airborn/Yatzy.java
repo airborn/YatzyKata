@@ -41,14 +41,7 @@ public class Yatzy {
     }
 
     public int threes() {
-        int s;
-        s = 0;
-        if (dice[0] == 3) s += 3;
-        if (dice[1] == 3) s += 3;
-        if (dice[2] == 3) s += 3;
-        if (dice[3] == 3) s += 3;
-        if (dice[4] == 3) s += 3;
-        return s;
+        return (int) IntStream.of(dice).filter(i -> i == 3).sum();
     }
 
 
