@@ -100,17 +100,14 @@ public class Yatzy {
     }
 
     public int four_of_a_kind() {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[dice[0] - 1]++;
-        tallies[dice[1] - 1]++;
-        tallies[dice[2] - 1]++;
-        tallies[dice[3] - 1]++;
-        tallies[dice[4] - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i + 1) * 4;
-        return 0;
+        return IntStream.of(dice).boxed()
+                .collect(groupingBy(identity(), counting()))
+                .entrySet().stream()
+                .filter(en -> en.getValue() >= 4)
+                .findFirst()
+                .map(Entry::getKey)
+                .map(k -> 4 * k)
+                .orElse(0);
     }
 
     public int three_of_a_kind() {
