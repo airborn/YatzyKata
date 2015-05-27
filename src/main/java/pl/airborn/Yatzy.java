@@ -124,36 +124,18 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[dice[0] - 1] += 1;
-        tallies[dice[1] - 1] += 1;
-        tallies[dice[2] - 1] += 1;
-        tallies[dice[3] - 1] += 1;
-        tallies[dice[4] - 1] += 1;
-        if (tallies[0] == 1 &&
-                tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1)
+        int sum = IntStream.of(dice).distinct().sum();
+        if (sum == 15) {
             return 15;
+        }
         return 0;
     }
 
     public int largeStraight() {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[dice[0] - 1] += 1;
-        tallies[dice[1] - 1] += 1;
-        tallies[dice[2] - 1] += 1;
-        tallies[dice[3] - 1] += 1;
-        tallies[dice[4] - 1] += 1;
-        if (tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1
-                && tallies[5] == 1)
+        int sum = IntStream.of(dice).distinct().sum();
+        if (sum == 20) {
             return 20;
+        }
         return 0;
     }
 
