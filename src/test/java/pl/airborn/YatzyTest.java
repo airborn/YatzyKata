@@ -168,7 +168,7 @@ public class YatzyTest {
         };
     }
 
-
+    @Test
     @Parameters(method = "three")
     @TestCaseName("[{index}] three of a kind of({0}, {1}, {2}, {3}, {4}) is {5}")
     public void three_of_a_kind(int d1, int d2, int d3, int d4, int d5, int expected) {
@@ -181,6 +181,7 @@ public class YatzyTest {
                 new Object[]{3, 3, 3, 4, 5, 9},
                 new Object[]{3, 3, 3, 3, 5, 9},
                 new Object[]{5, 3, 5, 4, 5, 15},
+                new Object[]{5, 3, 2, 4, 5, 0},
         };
     }
 

@@ -1,10 +1,14 @@
 package pl.airborn;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.ToIntFunction;
 import java.util.stream.IntStream;
 
+import static java.util.Map.*;
 import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 public class Yatzy {
 
@@ -110,17 +114,14 @@ public class Yatzy {
     }
 
     public int three_of_a_kind() {
-        int[] t;
-        t = new int[6];
-        t[dice[0] - 1]++;
-        t[dice[1] - 1]++;
-        t[dice[2] - 1]++;
-        t[dice[3] - 1]++;
-        t[dice[4] - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (t[i] >= 3)
-                return (i + 1) * 3;
-        return 0;
+        return IntStream.of(dice).boxed()
+                .collect(groupingBy(identity(), counting()))
+                .entrySet().stream()
+                .filter(en -> en.getValue() >= 3)
+                .findFirst()
+                .map(Entry::getKey)
+                .map(k -> 3 * k)
+                .orElse(0);
     }
 
     public int smallStraight() {
