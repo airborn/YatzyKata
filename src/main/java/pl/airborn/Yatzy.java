@@ -1,9 +1,5 @@
 package pl.airborn;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
 import java.util.stream.IntStream;
 
 import static java.util.Map.*;
@@ -100,24 +96,21 @@ public class Yatzy {
     }
 
     public int four_of_a_kind() {
-        return IntStream.of(dice).boxed()
-                .collect(groupingBy(identity(), counting()))
-                .entrySet().stream()
-                .filter(en -> en.getValue() >= 4)
-                .findFirst()
-                .map(Entry::getKey)
-                .map(k -> 4 * k)
-                .orElse(0);
+        return ofAKind(4);
     }
 
     public int three_of_a_kind() {
+        return ofAKind(3);
+    }
+
+    private Integer ofAKind(int kind) {
         return IntStream.of(dice).boxed()
                 .collect(groupingBy(identity(), counting()))
                 .entrySet().stream()
-                .filter(en -> en.getValue() >= 3)
+                .filter(en -> en.getValue() >= kind)
                 .findFirst()
                 .map(Entry::getKey)
-                .map(k -> 3 * k)
+                .map(k -> kind * k)
                 .orElse(0);
     }
 
