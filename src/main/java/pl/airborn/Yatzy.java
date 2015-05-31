@@ -1,12 +1,17 @@
 package pl.airborn;
 
 import java.util.IntSummaryStatistics;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.Map.Entry;
 import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 public class Yatzy {
 
@@ -125,36 +130,17 @@ public class Yatzy {
     }
 
     public int fullHouse() {
-        int[] tallies;
-        boolean _2 = false;
-        int i;
-        int _2_at = 0;
-        boolean _3 = false;
-        int _3_at = 0;
-
-
-        tallies = new int[6];
-        tallies[dice[0] - 1] += 1;
-        tallies[dice[1] - 1] += 1;
-        tallies[dice[2] - 1] += 1;
-        tallies[dice[3] - 1] += 1;
-        tallies[dice[4] - 1] += 1;
-
-        for (i = 0; i != 6; i += 1)
-            if (tallies[i] == 2) {
-                _2 = true;
-                _2_at = i + 1;
-            }
-
-        for (i = 0; i != 6; i += 1)
-            if (tallies[i] == 3) {
-                _3 = true;
-                _3_at = i + 1;
-            }
-
-        if (_2 && _3)
-            return _2_at * 2 + _3_at * 3;
-        else
+        List<Integer> duplicates = IntStream.of(dice).boxed()
+                .collect(groupingBy(identity(), counting()))
+                .entrySet().stream()
+                .filter(en -> en.getValue() >= 2)
+                .map(e -> e.getKey() * e.getValue().intValue())
+                .collect(toList());
+        if (duplicates.size() == 2) {
+            return duplicates.stream()
+                    .collect(summingInt(i -> i));
+        } else {
             return 0;
+        }
     }
 }
