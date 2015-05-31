@@ -2,11 +2,6 @@ package pl.airborn;
 
 import java.util.IntSummaryStatistics;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.Map.Entry;
