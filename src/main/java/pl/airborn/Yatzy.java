@@ -2,9 +2,10 @@ package pl.airborn;
 
 import java.util.stream.IntStream;
 
-import static java.util.Map.*;
+import static java.util.Map.Entry;
 import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class Yatzy {
 
@@ -62,17 +63,14 @@ public class Yatzy {
     }
 
     public int score_pair() {
-        int[] counts = new int[6];
-        counts[dice[0] - 1]++;
-        counts[dice[1] - 1]++;
-        counts[dice[2] - 1]++;
-        counts[dice[3] - 1]++;
-        counts[dice[4] - 1]++;
-        int at;
-        for (at = 0; at != 6; at++)
-            if (counts[6 - at - 1] >= 2)
-                return (6 - at) * 2;
-        return 0;
+        return IntStream.of(dice).boxed()
+                .collect(groupingBy(identity(), counting()))
+                .entrySet().stream()
+                .filter(en -> en.getValue() >= 2)
+                .map(Entry::getKey)
+                .max(Integer::compare)
+                .map(v -> 2 * v)
+                .orElse(0);
     }
 
     public int two_pair() {
