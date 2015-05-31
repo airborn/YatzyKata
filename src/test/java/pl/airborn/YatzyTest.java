@@ -165,6 +165,7 @@ public class YatzyTest {
         return new Object[]{
                 new Object[]{3, 3, 5, 4, 5, 16},
                 new Object[]{3, 3, 5, 5, 5, 16},
+                new Object[]{3, 3, 5, 4, 2, 0},
         };
     }
 
